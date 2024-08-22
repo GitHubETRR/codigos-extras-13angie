@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+
+// Estructura almacena inf de un elemento
+struct Elemento {
+    string simbolo;
+      int menor_valencia;
+       int mayor_valencia;
+};
+
+// Función determinar terminación oso o ico con la valencia
+    string determinar_terminacion(int oxidacion, int menor_valencia, int mayor_valencia) {
+    if (oxidacion == menor_valencia) { // ==compara si es igual
+        return "oso";
+    } else if (oxidacion == mayor_valencia) {
+        return "ico";
+    } else {
+        return "Valencia no registrada todavia";
+    }
+}
+
+int main() { //estructuras de algnos elementos
+    Elemento elementos[] = {
+        {"Fe", 2, 3},  
+        {"Cu", 1, 2},  
+        {"Sn", 2, 4},  
+        {"Pb", 2, 4},  
+        {"Hg", 1, 2}   
+    };
+
+        string elemento;
+        int oxidacion;
+
+        cout << "Ingrese el símbolo del elemento (Ejemplo: Fe, Cu, etc): ";
+        cin >> elemento;
+
+        cout << "Ingrese el número de oxidación: ";
+        cin >> oxidacion;
+
+    bool encontrado = false; //variable booleana
+
+    for (int i = 0; i < sizeof(elementos) / sizeof(elementos[0]); i++) { //i recorre el array elementos y busca la posicion donde se encuentra la igualdad con el elemento ingresado
+        if (elementos[i].simbolo == elemento) {
+        string terminacion = determinar_terminacion(oxidacion, elementos[i].menor_valencia, elementos[i].mayor_valencia);
+        cout << "El compuesto tiene la terminación: -" << terminacion << endl;
+        encontrado = true;
+        break;
+        }
+    }
+    
+    if (!encontrado) { //!es lo contrario
+            cout << "Elemento o valencia no registrada en el sistema todavia." << endl;
+    }
+
+    return 0;
+}
